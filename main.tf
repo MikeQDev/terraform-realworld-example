@@ -6,6 +6,11 @@ module "roles" {
   source = "./roles/"
 }
 
+module "sns" {
+  source = "./sns/"
+  lambda_func_name = aws_lambda_function.addition_lambda.function_name
+}
+
 resource "aws_lambda_function" "addition_lambda" {
   function_name = "addition"
   role = module.roles.lambda_role.arn
