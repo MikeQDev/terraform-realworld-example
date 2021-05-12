@@ -29,14 +29,24 @@ resource "aws_iam_policy" "all_policy" {
             "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": [
-                "sns:*",
-                "apigateway:*",
-                "logs:*",
-                "lambda:*",
-                "dynamodb:*",
-                "sqs:*"
+                "sns:Publish",
+                "lambda:InvokeFunction",
+                "logs:PutLogEvents"
             ],
-            "Resource": "*"
+            "Resource": [
+                "arn:aws:logs:*:686529668265:log-group:*:log-stream:*",
+                "arn:aws:lambda:*:686529668265:function:*",
+                "arn:aws:sns:*:686529668265:*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogStream",
+                "logs:CreateLogGroup"
+            ],
+            "Resource": "arn:aws:logs:*:686529668265:log-group:*"
         }
     ]
 }
